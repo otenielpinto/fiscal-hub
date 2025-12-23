@@ -8,6 +8,7 @@ import os from "os";
 import bodyParser from "body-parser";
 
 import classTribRoutes from "./routes/classTribRoutes.js";
+import ncmNbsCclasstribRoutes from "./routes/ncmNbsCclasstribRoutes.js";
 import versionRoutes from "./routes/versionRoutes.js";
 
 dotenv.config();
@@ -33,6 +34,7 @@ app.use(
 );
 
 //Minhas rotas igual eu faço com o horse
+app.use("/ncmNbsCclasstrib/", ncmNbsCclasstribRoutes);
 app.get("/health", (req, res) => {
   const healthCheck = {
     name: "fiscal-hub-api",
