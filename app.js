@@ -8,6 +8,7 @@ import os from "os";
 import bodyParser from "body-parser";
 
 import classTribRoutes from "./routes/classTribRoutes.js";
+import versionRoutes from "./routes/versionRoutes.js";
 
 dotenv.config();
 process.env.TZ = "America/Sao_Paulo";
@@ -53,6 +54,7 @@ app.get("/health", (req, res) => {
 //this for route will need for store front, also for admin dashboard
 
 app.use("/classTrib/", classTribRoutes);
+app.use("/version", versionRoutes);
 
 // Use express's default error handling middleware
 app.use((err, req, res, next) => {

@@ -1,0 +1,28 @@
+openapi: 3.0.3
+info:
+  title: Fiscal Hub Version Endpoint
+  version: 1.0.0
+  description: API para retornar a versão do app Fiscal Hub
+paths:
+  /version:
+    get:
+      summary: Retorna a versão do app
+      tags:
+        - Version
+      responses:
+        "200":
+          description: Versão atual do app
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/VersionResponse"
+components:
+  schemas:
+    VersionResponse:
+      type: object
+      properties:
+        version:
+          type: string
+          example: "1.0"
+      required:
+        - version
