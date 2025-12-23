@@ -1,0 +1,43 @@
+openapi: 3.0.3
+info:
+  title: ncmNbsCclasstrib API
+  version: 1.0.0
+  description: Endpoint para consulta de classificação tributária NCM/NBS (collection: tmp_ncm_nbs_cclasstrib)
+servers:
+  - url: http://localhost:PORT
+paths:
+  /ncmNbsCclasstrib/:
+    get:
+      summary: Consulta classificação tributária NCM/NBS
+      responses:
+        "200":
+          description: Lista de classificações NCM/NBS
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NcmNbsCclasstrib"
+        "500":
+          description: Erro interno
+components:
+  schemas:
+    NcmNbsCclasstrib:
+      type: object
+      required:
+        - codigoNcmNbs
+        - descricao
+        - aliquota
+        - tipo
+      properties:
+        codigoNcmNbs:
+          type: string
+          description: Código NCM ou NBS
+        descricao:
+          type: string
+        aliquota:
+          type: number
+        tipo:
+          type: string
+          enum: [NCM, NBS]
+        # Outros campos conforme modelo do /classTrib/
