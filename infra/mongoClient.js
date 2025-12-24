@@ -3,9 +3,18 @@ import { MongoClient } from "mongodb";
 let client = null;
 var dateStarted = null;
 
+function isConnected() {
+  // Para driver mongodb >=4.x
+  return client && client.topology && client.topology.isConnected();
+}
+
 async function connect() {
-  if (!client) client = new MongoClient(process.env.MONGO_CONNECTION);
-  await client.connect();
+  if (!client) {
+    client = new MongoClient(process.env.MONGO_CONNECTION);
+  }
+  if (!isConnected()) {
+    await client.connect();
+  }
   return client.db(process.env.MONGO_DATABASE);
 }
 
@@ -49,4 +58,5 @@ export const TMongo = {
   disconnect,
   newConnection,
   close,
+  isConnected,
 };

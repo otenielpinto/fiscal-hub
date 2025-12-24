@@ -16,14 +16,23 @@
     "xml2js": "^0.6.2",
     "zod": "^3.23.8"
   },
-  "scripts": {
-    "start": "npx nodemon server.js"
-  },
   "name": "fiscal-hub-api",
   "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "npx nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "version": "1.0.0",
   "description": "API de integracao Reforma Tributaria desenvolvida by T7Ti Tecnologia da informacao",
-  "main": "app.js",
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "engines": {
+    "node": "22.x",
+    "npm": "10.x"
+  },
+  "devDependencies": {
+    "@types/node": "^25.0.3"
+  }
 }

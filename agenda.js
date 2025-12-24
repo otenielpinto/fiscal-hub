@@ -16,7 +16,6 @@ async function init() {
       console.log("Job start as " + lib.currentDateTimeStr());
 
       try {
-        await TMongo.close();
         await task();
       } finally {
         global.processandoNow = 0;
