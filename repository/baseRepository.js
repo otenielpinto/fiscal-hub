@@ -19,13 +19,30 @@ class Repository {
     this.id_tenant = id_tenant ? Number(id_tenant) : null;
   }
 
+  async isConnected(client) {
+    // Para driver mongodb >=4.x
+    return client && client.topology && client.topology.isConnected();
+  }
+
   /**
    * Automatically connects to MongoDB if not already connected
    */
   async getDb() {
     if (!this._db) {
       this._db = await TMongo.connect();
+      return this._db;
     }
+
+    // Ensure connection is active
+    if (!(await this.isConnected(this._db.client))) {
+      try {
+        await this._db.client.connect();
+      } catch (error) {
+        console.error("Erro ao reconectar ao MongoDB:", error);
+        throw error;
+      }
+    }
+
     return this._db;
   }
 

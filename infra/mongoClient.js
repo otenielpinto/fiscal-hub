@@ -10,7 +10,11 @@ function isConnected() {
 
 async function connect() {
   if (!client) {
-    client = new MongoClient(process.env.MONGO_CONNECTION);
+    client = new MongoClient(process.env.MONGO_CONNECTION, {
+      retryWrites: true,
+      serverSelectionTimeoutMS: 5000,
+      socketTimeoutMS: 45000,
+    });
   }
   if (!isConnected()) {
     await client.connect();
